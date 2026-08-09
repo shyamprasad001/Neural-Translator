@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Machine Translation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="NMT Logo" class="logo-img">
+                <span class="logo-text">NMT</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1>Neural Machine Translation using Seq2Seq LSTM</h1>
+            <p class="subtitle">English to French Translator</p>
+        </header>
+
+        <section class="translator-container">
+            <!-- Input Card -->
+            <div class="card input-card">
+                <h2>Translate</h2>
+                <textarea id="english-input" placeholder="Example:&#10;I am happy" rows="4"></textarea>
+                
+                <div class="examples">
+                    <p>Try an example:</p>
+                    <span class="example-btn">I am happy</span>
+                    <span class="example-btn">I am tired</span>
+                    <span class="example-btn">I am a student</span>
+                    <span class="example-btn">I am a teacher</span>
+                </div>
+
+                <div id="unknown-words-container" class="hidden">
+                    <p>Unknown word(s) detected:</p>
+                    <ul id="unknown-words-list"></ul>
+                </div>
+
+                <div class="button-group">
+                    <button id="translate-btn" class="btn btn-primary">Translate</button>
+                    <button id="clear-btn" class="btn btn-secondary">Clear</button>
+                </div>
+            </div>
+
+            <!-- Output Card -->
+            <div class="card output-card">
+                <h2>Result</h2>
+                <div class="result-section">
+                    <div class="result-box">
+                        <span class="label">English Sentence</span>
+                        <p id="english-output" class="text-content">...</p>
+                    </div>
+                    <div class="result-box">
+                        <span class="label">French Translation</span>
+                        <div id="loading" class="hidden">
+                            <span class="loader"></span> Translating...
+                        </div>
+                        <p id="french-output" class="text-content highlight">...</p>
+                    </div>
+                </div>
+                
+                <div class="status-section">
+                    <span class="label">Prediction Status</span>
+                    <p id="status-message">Awaiting input...</p>
+                    <p id="time-message" class="time-taken"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Model Info Section -->
+        <section class="model-info-section">
+            <div class="card info-card">
+                <h3>Model Information</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Model Type</span>
+                        <span class="info-value">{{ model_info.model_type }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Framework</span>
+                        <span class="info-value">{{ model_info.framework }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Training Samples</span>
+                        <span class="info-value">{{ model_info.training_samples }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">English Vocab Size</span>
+                        <span class="info-value">{{ model_info.eng_vocab_size }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">French Vocab Size</span>
+                        <span class="info-value">{{ model_info.fre_vocab_size }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Max Sentence Length</span>
+                        <span class="info-value">{{ model_info.max_eng_len }}</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created using Flask + TensorFlow</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

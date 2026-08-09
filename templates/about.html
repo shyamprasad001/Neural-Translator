@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Neural Machine Translation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="NMT Logo" class="logo-img">
+                <span class="logo-text">NMT</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about" class="active">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1>About This Project</h1>
+            <p class="subtitle">Understanding Neural Machine Translation</p>
+        </header>
+
+        <section class="about-content card">
+            <h2>What is Neural Machine Translation?</h2>
+            <p>Neural Machine Translation (NMT) is a method where artificial intelligence is used to translate text from one language to another. Instead of translating word by word, the AI looks at the entire sentence to understand the context and meaning before generating the translation.</p>
+
+            <h2>What is Seq2Seq?</h2>
+            <p>Seq2Seq stands for Sequence-to-Sequence. It is a type of machine learning model designed to take an input sequence (like a sentence in English) and turn it into an output sequence (like a sentence in French). It consists of two main parts: an Encoder and a Decoder.</p>
+
+            <h3>Encoder</h3>
+            <p>The Encoder reads the input English sentence word by word. As it reads, it compresses the meaning of the entire sentence into a fixed-size mathematical representation, often called a "context vector" or "state vector". This vector captures the essence of what the sentence means.</p>
+
+            <h3>Decoder</h3>
+            <p>The Decoder takes the context vector created by the Encoder and starts generating the French translation word by word. It uses the context vector and the words it has already translated to predict the next best word until it reaches the end of the sentence.</p>
+
+            <h2>What is LSTM?</h2>
+            <p>LSTM stands for Long Short-Term Memory. It is a special kind of Recurrent Neural Network (RNN) that is very good at remembering important information over long sequences and forgetting unimportant details. Both the Encoder and Decoder in this project use LSTM layers to process the sentences.</p>
+
+            <h2>Embeddings</h2>
+            <p>Before words can be processed by the LSTM, they must be converted into numbers. Embeddings do this by turning words into dense arrays of numbers where words with similar meanings are mathematically closer to each other.</p>
+
+            <h2>Training Dataset</h2>
+            <p>This mini-project is designed to run and train very quickly on local machines. Therefore, it uses a tiny custom dataset consisting of just 4 simple English-to-French sentence pairs. Because of this small dataset, the model only knows the words present in these 4 sentences.</p>
+
+            <h2>Model Architecture</h2>
+            <p>1. <strong>Input:</strong> English sentence is tokenized and converted to numbers.<br>
+               2. <strong>Embedding:</strong> Numbers are converted to dense vectors.<br>
+               3. <strong>Encoder LSTM:</strong> Processes vectors and outputs states.<br>
+               4. <strong>Decoder LSTM:</strong> Uses Encoder states to start predicting French words.<br>
+               5. <strong>Dense Layer:</strong> Converts predictions back into French vocabulary words.</p>
+
+            <h2>Limitations</h2>
+            <p>Since this model was trained on only 4 sentences, it has a very limited vocabulary. If you type words it has never seen, it will mark them as "Unknown words" and will not be able to translate them correctly.</p>
+
+            <h2>Future Improvements</h2>
+            <p>To make this a real-world translator, we could:<br>
+               - Train it on millions of sentences using large datasets like Europarl or WMT.<br>
+               - Add an "Attention Mechanism" so the Decoder can look back at specific parts of the English sentence while translating.<br>
+               - Use pre-trained Word Embeddings like Word2Vec or GloVe.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created using Flask + TensorFlow</p>
+    </footer>
+</body>
+</html>
